@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notion-Inspired Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@0.338.0"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                <path d="M2 17l10 5 10-5"></path>
+                <path d="M2 12l10 5 10-5"></path>
+            </svg>
+            DynamicDash
+        </div>
+        
+        <ul class="nav-links">
+            <li><a href="#" class="active">Home</a></li>
+            <li><a href="#">Projects</a></li>
+            <li><a href="#">Calendar</a></li>
+            <li><a href="#">Notes</a></li>
+            <li><a href="#">Tasks</a></li>
+            <li><a href="#">Settings</a></li>
+        </ul>
+        
+        <div class="search-bar">
+            <input type="text" placeholder="Search...">
+            <span class="search-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.35-4.35"></path>
+                </svg>
+            </span>
+        </div>
+        
+        <div class="header-actions">
+            <div class="notifications">
+                <button class="theme-toggle" id="theme-toggle-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="theme-toggle-icon">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+                <span class="notification-badge">3</span>
+            </div>
+            <div class="user-profile">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <aside class="sidebar">
+            <ul>
+                <li class="sidebar-item active">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="14" width="7" height="7"></rect>
+                        <rect x="3" y="14" width="7" height="7"></rect>
+                    </svg>
+                    Workspace
+                </li>
+                <li class="sidebar-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"></path>
+                    </svg>
+                    Pinned Notes
+                </li>
+                <li class="sidebar-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="9" cy="7" r="4"></circle>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                    </svg>
+                    Teams
+                </li>
+                <li class="sidebar-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 19l9-7-9-7-9 7 9 7z"></path>
+                        <path d="M12 19v-12"></path>
+                        <path d="M12 7l9 7-9 7z"></path>
+                    </svg>
+                    Quick Links
+                </li>
+                <li class="sidebar-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                    </svg>
+                    Integrations
+                </li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <section class="overview-section">
+                <h1 style="font-size: 1.8rem; margin-bottom: 1.5rem; color: var(--primary-color); font-weight: 700;">Dashboard Overview</h1>
+                <div class="overview-grid">
+                    <div class="widget-card fade-in stagger-reveal">
+                        <div class="widget-header">
+                            <h2 class="widget-title">Tasks Overview</h2>
+                            <span class="widget-action">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M12 5v14M5 12h14"></path>
+                                </svg>
+                            </span>
+                        </div>
+                        <div class="tasks-progress">
+                            <div class="task-item">
+                                <span class="task-name">Complete project proposal</span>
+                                <span class="task-progress">80%</span>
+                            </div>
+                            <div class="task-item">
+                                <span class="task-name">Review team updates</span>
+                                <span class="task-progress">45%</span>
+                            </div>
+                            <div class="task-item">
+                                <span class="task-name">Schedule meeting</span>
+                                <span class="task-progress">100%</span>
+                            </div>
+                            <div class="task-item">
+                                <span class="task-name">Update documentation</span>
+                                <span class="task-progress">65%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="widget-card fade-in stagger-reveal">
+                        <div class="widget-header">
+                            <h2 class="widget-title">Calendar Snapshot</h2>
+                            <span class="widget-action">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M19 4h-1.5a1.5 1.5 0 0 0-1.5 1.5v15a1.5 1.5 0 0 0 1.5 1.5H19a1.5 1.5 0 0 0 1.5-1.5V5.5A1.5 1.5 0 0 0 19 4z"></path>
+                                    <path d="M8 4h-1.5a1.5 1.5 0 0 0-1.5 1.5v15a1.5 1.5 0 0 0 1.5 1.5H8a1.5 1.5 0 0 0 1.5-1.5V5.5A1.5 1.5 0 0 0 8 4z"></path>
+                                    <path d="M3 4h1.5a1.5 1.5 0 0 0 1.5-1.5V1.5A1.5 1.5 0 0 0 4.5 0H3a1.5 1.5 0 0 0-1.5 1.5V4a1.5 1.5 0 0 0 1.5 1.5z"></path>
+                                    <path d="M16 4h1.5a1.5 1.5 0 0 0 1.5-1.5V1.5A1.5 1.5 0 0 0 17.5 0H16a1.5 1.5 0 0 0-1.5 1.5V4a1.5 1.5 0 0 0 1.5 1.5z"></path>
+                                </svg>
+                            </span>
+                        </div>
+                        <div class="calendar-snapshot">
+                            <div class="calendar-day other-month">28</div>
+                            <div class="calendar-day other-month">29</div>
+                            <div class="calendar-day other-month">30</div>
+                            <div class="calendar-day">1</div>
+                            <div class="calendar-day">2</div>
+                            <div class="calendar-day today">3</div>
+                            <div class="calendar-day has-event">4</div>
+                            <div class="calendar-day">5</div>
+                            <div class="calendar-day">6</div>
+                            <div class="calendar-day">7</div>
+                            <div class="calendar-day">8</div>
+                            <div class="calendar-day">9</div>
+                            <div class="calendar-day">10</div>
+                            <div class="calendar-day">11</div>
+                            <div class="calendar-day">12</div>
+                            <div class="calendar-day">13</div>
+                            <div class="calendar-day">14</div>
+                            <div class="calendar-day">15</div>
+                            <div class="calendar-day">16</div>
+                            <div class="calendar-day">17</div>
+                            <div class="calendar-day">18</div>
+                            <div class="calendar-day">19</div>
+                            <div class="calendar-day">20</div>
+                            <div class="calendar-day">21</div>
+                            <div class="calendar-day">22</div>
+                            <div class="calendar-day">23</div>
+                            <div class="calendar-day">24</div>
+                            <div class="calendar-day">25</div>
+                            <div class="calendar-day">26</div>
+                            <div class="calendar-day">27</div>
+                            <div class="calendar-day">28</div>
+                            <div class="calendar-day">29</div>
+                            <div class="calendar-day">30</div>
+                            <div class="calendar-day">31</div>
+                            <div class="calendar-day other-month">1</div>
+                            <div class="calendar-day other-month">2</div>
+                            <div class="calendar-day other-month">3</div>
+                            <div class="calendar-day other-month">4</div>
+                            <div class="calendar-day other-month">5</div>
+                        </div>
+                    </div>
+
+                    <div class="widget-card fade-in stagger-reveal">
+                        <div class="widget-header">
+                            <h2 class="widget-title">Recent Notes</h2>
+                            <span class="widget-action">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                    <polyline points="14 2 14 8 20 8"></polyline>
+                                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                                    <polyline points="10 9 9 9 8 9"></polyline>
+                                </svg>
+                            </span>
+                        </div>
+                        <div class="notes-preview">
+                            <div class="note-item">
+                                <div class="note-title">Project Planning</div>
+                                <div class="note-meta">Updated 2 hours ago</div>
+                            </div>
+                            <div class="note-item">
+                                <div class="note-title">Meeting Notes</div>
+                                <div class="note-meta">Updated 5 hours ago</div>
+                            </div>
+                            <div class="note-item">
+                                <div class="note-title">Weekly Goals</div>
+                                <div class="note-meta">Updated yesterday</div>
+                            </div>
+                            <div class="note-item">
+                                <div class="note-title">Research Summary</div>
+                                <div class="note-meta">Updated 2 days ago</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="widget-card fade-in stagger-reveal">
+                        <div class="widget-header">
+                            <h2 class="widget-title">Goals Progress</h2>
+                            <span class="widget-action">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                                </svg>
+                            </span>
+                        </div>
+                        <div class="goals-progress">
+                            <div class="goal-item">
+                                <div class="goal-header">
+                                    <span class="goal-title">Complete Q2 Projects</span>
+                                    <span class="goal-percentage">75%</span>
+                                </div>
+                                <div class="goal-bar">
+                                    <div class="goal-fill" style="width: 75%;"></div>
+                                </div>
+                            </div>
+                            <div class="goal-item">
+                                <div class="goal-header">
+                                    <span class="goal-title">Read 10 Books</span>
+                                    <span class="goal-percentage">40%</span>
+                                </div>
+                                <div class="goal-bar">
+                                    <div class="goal-fill" style="width: 40%;"></div>
+                                </div>
+                            </div>
+                            <div class="goal-item">
+                                <div class="goal-header">
+                                    <span class="goal-title">Exercise 4x/week</span>
+                                    <span class="goal-percentage">100%</span>
+                                </div>
+                                <div class="goal-bar">
+                                    <div class="goal-fill" style="width: 100%;"></div>
+                                </div>
+                            </div>
+                            <div class="goal-item">
+                                <div class="goal-header">
+                                    <span class="goal-title">Learn React</span>
+                                    <span class="goal-percentage">25%</span>
+                                </div>
+                                <div class="goal-bar">
+                                    <div class="goal-fill" style="width: 25%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="projects-section">
+                <h2 style="font-size: 1.5rem; margin-bottom: 1.5rem; color: var(--primary-color); font-weight: 700;">Projects</h2>
+                <div class="kanban-board">
+                    <div class="kanban-column" id="kanban-todo">
+                        <div class="kanban-header">
+                            <h3 class="kanban-title">To Do</h3>
+                            <span class="kanban-count">4</span>
+                        </div>
+                        <div class="kanban-cards">
+                            <div class="kanban-card" draggable="true">
+                                <div class="kanban-card-title">Design new dashboard UI</div>
+                                <div class="kanban-card-tags">
+                                    <span class="tag high">High Priority</span>
+                                </div>
+                            </div>
+                            <div class="kanban-card" draggable="true">
+                                <div class="kanban-card-title">Set up CI/CD pipeline</div>
+                                <div class="kanban-card-tags">
+                                    <span class="tag medium">Medium Priority</span>
+                                </div>
+                            </div>
+                            <div class="kanban-card" draggable="true">
+                                <div class="kanban-card-title">Create user onboarding flow</div>
+                                <div class="kanban-card-tags">
+                                    <span class="tag low">Low Priority</span>
+                                </div>
+                            </div>
+                            <div class="kanban-card" draggable="true">
+                                <div class="kanban-card-title">Document API endpoints</div>
+                                <div class="kanban-card-tags">
+                                    <span class="tag medium">Medium Priority</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="kanban-column" id="kanban-in-progress">
+                        <div class="kanban-header">
+                            <h3 class="kanban-title">In Progress</h3>
+                            <span class="kanban-count">3</span>
+                        </div>
+                        <div class="kanban-cards">
+                            <div class="kanban-card" draggable="true">
+                                <div class="kanban-card-title">Implement dark mode</div>
+                                <div class="kanban-card-tags">
+                                    <span class="tag high">High Priority</span>
+                                </div>
+                            </div>
+                            <div class="kanban-card" draggable="true">
+                                <div class="kanban-card-title">Add real-time collaboration</div>
+                                <div class="kanban-card-tags">
+                                    <span class="tag high">High Priority</span>
+                                </div>
+                            </div>
+                            <div class="kanban-card" draggable="true">
+                                <div class="kanban-card-title">Optimize performance</div>
+                                <div class="kanban-card-tags">
+                                    <span class="tag medium">Medium Priority</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="kanban-column" id="kanban-completed">
+                        <div class="kanban-header">
+                            <h3 class="kanban-title">Completed</h3>
+                            <span class="kanban-count">7</span>
+                        </div>
+                        <div class="kanban-cards">
+                            <div class="kanban-card" draggable="true">
+                                <div class="kanban-card-title">Setup database schema</div>
+                                <div class="kanban-card-tags">
+                                    <span class="tag low">Low Priority</span>
+                                </div>
+                            </div>
+                            <div class="kanban-card" draggable="true">
+                                <div class="kanban-card-title">Create wireframes</div>
+                                <div class="kanban-card-tags">
+                                    <span class="tag medium">Medium Priority</span>
+                                </div>
+                            </div>
+                            <div class="kanban-card" draggable="true">
+                                <div class="kanban-card-title">Configure analytics</div>
+                                <div class="kanban-card-tags">
+                                    <span class="tag low">Low Priority</span>
+                                </div>
+                            </div>
+                            <div class="kanban-card" draggable="true">
+                                <div class="kanban-card-title">Set up authentication</div>
+                                <div class="kanban-card-tags">
+                                    <span class="tag medium">Medium Priority</span>
+                                </div>
+                            </div>
+                            <div class="kanban-card" draggable="true">
+                                <div class="kanban-card-title">Write unit tests</div>
+                                <div class="kanban-card-tags">
+                                    <span class="tag medium">Medium Priority</span>
+                                </div>
+                            </div>
+                            <div class="kanban-card" draggable="true">
+                                <div class="kanban-card-title">Deploy staging environment</div>
+                                <div class="kanban-card-tags">
+                                    <span class="tag low">Low Priority</span>
+                                </div>
+                            </div>
+                            <div class="kanban-card" draggable="true">
+                                <div class="kanban-card-title">Finalize design system</div>
+                                <div class="kanban-card-tags">
+                                    <span class="tag high">High Priority</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="calendar-section">
+                <h2 style="font-size: 1.5rem; margin-bottom: 1.5rem; color: var(--primary-color); font-weight: 700;">Calendar</h2>
+                <div class="calendar-view">
+                    <div class="calendar-header">
+                        <h3 style="font-size: 1.3rem; color: var(--primary-color); font-weight: 600;">June 2023</h3>
+                        <div class="calendar-toggle">
+                            <button class="active">Month</button>
+                            <button>Week</button>
+                        </div>
+                    </div>
+                    
+                    <div class="calendar-grid">
+                        <div class="calendar-day-header">Sun</div>
+                        <div class="calendar-day-header">Mon</div>
+                        <div class="calendar-day-header">Tue</div>
+                        <div class="calendar-day-header">Wed</div>
+                        <div class="calendar-day-header">Thu</div>
+                        <div class="calendar-day-header">Fri</div>
+                        <div class="calendar-day-header">Sat</div>
+                    </div>
+                    
+                    <div class="calendar-week">
+                        <div class="calendar-time-slot">
+                            <div class="calendar-event">Team Standup</div>
+                            <div class="calendar-event">Client Review</div>
+                        </div>
+                        <div class="calendar-time-slot">
+                            <div class="calendar-event">Product Meeting</div>
+                        </div>
+                        <div class="calendar-time-slot">
+                            <div class="calendar-event">Code Review</div>
+                        </div>
+                        <div class="calendar-time-slot">
+                            <div class="calendar-event">Training Session</div>
+                        </div>
+                        <div class="calendar-time-slot">
+                            <div class="calendar-event">Project Deadline</div>
+                        </div>
+                        <div class="calendar-time-slot">
+                            <div class="calendar-event">Weekly Sync</div>
+                        </div>
+                        <div class="calendar-time-slot">
+                        </div>
+                    </div>
+                    
+                    <div class="add-event-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 5v14M5 12h14"></path>
+                        </svg>
+                        Add Event
+                    </div>
+                </div>
+            </section>
+
+            <section class="notes-section">
+                <h2 style="font-size: 1.5rem; margin-bottom: 1.5rem; color: var(--primary-color); font-weight: 700;">Notes</h2>
+                <div class="notes-editor">
+                    <div class="editor-toolbar">
+                        <button class="toolbar-btn" title="Bold">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M6 4h4a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"></path>
+                                <path d="M16 4h4a4 4 0 0 1 4 4 4 4 0 0 1-4 4h-4"></path>
+                                <path d="M10 16h8"></path>
+                            </svg>
+                        </button>
+                        <button class="toolbar-btn" title="Italic">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M10 4h4a4 4 0 0 1 4 4 4 4 0 0 1-4 4h-4"></path>
+                                <path d="M14 16h4a4 4 0 0 1 4 4 4 4 0 0 1-4 4h-4"></path>
+                                <path d="M6 4h4a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6"></path>
+                                <path d="M6 16h4a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6"></path>
+                            </svg>
+                        </button>
+                        <button class="toolbar-btn" title="Heading">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 18h16"></path>
+                                <path d="M4 12h16"></path>
+                                <path d="M4 6h16"></path>
+                            </svg>
+                        </button>
+                        <button class="toolbar-btn" title="List">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="8" y1="6" x2="21" y2="6"></line>
+                                <line x1="8" y1="12" x2="21" y2="12"></line>
+                                <line x1="8" y1="18" x2="21" y2="18"></line>
+                                <line x1="3" y1="6" x2="3.01" y2="6"></line>
+                                <line x1="3" y1="12" x2="3.01" y2="12"></line>
+                                <line x1="3" y1="18" x2="3.01" y2="18"></line>
+                            </svg>
+                        </button>
+                        <button class="toolbar-btn" title="Toggle List">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 18h6"></path>
+                                <path d="M12 12h6"></path>
+                                <path d="M12 6h6"></path>
+                                <path d="M6 18H3"></path>
+                                <path d="M6 12H3"></path>
+                                <path d="M6 6H3"></path>
+                            </svg>
+                        </button>
+                        <button class="toolbar-btn" title="Embed">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="2" width="20" height="20" rx="2" ry="2"></rect>
+                                <path d="M16 12l-4-4-4 4"></path>
+                                <path d="M12 16V8"></path>
+                            </svg>
+                        </button>
+                        <button class="toolbar-btn" title="Markdown">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                <polyline points="14 2 14 8 20 8"></polyline>
+                                <line x1="16" y1="13" x2="8" y2="13"></line>
+                                <line x1="16" y1="17" x2="8" y2="17"></line>
+                                <polyline points="10 9 9 9 8 9"></polyline>
+                            </svg>
+                        </button>
+                    </div>
+                    
+                    <div class="editor-content" contenteditable="true">
+                        <p>Start typing here...</p>
+                        <h2>Getting Started with DynamicDash</h2>
+                        <p>Welcome to your new productivity dashboard! Here are some tips to get started:</p>
+                        <ul>
+                            <li>Create new notes using the editor above</li>
+                            <li>Organize tasks in the Kanban board</li>
+                            <li>Add events to your calendar</li>
+                            <li>Use the sidebar to navigate between sections</li>
+                        </ul>
+                        <blockquote>“The best way to predict the future is to create it.” — Peter Drucker</blockquote>
+                        <p>You can use markdown syntax to format your text:</p>
+                        <ul>
+                            <li>**Bold** text</li>
+                            <li>*Italic* text</li>
+                            <li>`code` blocks</li>
+                            <li>~~Strikethrough~~</li>
+                        </ul>
+                        <h3>Toggle Lists</h3>
+                        <div class="toggle-list">
+                            <div class="toggle-indicator"></div>
+                            <span class="toggle-content">Feature 1</span>
+                        </div>
+                        <div class="toggle-list">
+                            <div class="toggle-indicator"></div>
+                            <span class="toggle-content">Feature 2</span>
+                        </div>
+                        <div class="toggle-list">
+                            <div class="toggle-indicator"></div>
+                            <span class="toggle-content">Feature 3</span>
+                        </div>
+                        <p>Don't forget to save your work!</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="tasks-section">
+                <h2 style="font-size: 1.5rem; margin-bottom: 1.5rem; color: var(--primary-color); font-weight: 700;">Tasks</h2>
+                <div class="tasks-list">
+                    <div class="tasks-header">
+                        <h3 style="font-size: 1.2rem; color: var(--primary-color); font-weight: 600;">All Tasks</h3>
+                        <div class="task-filter">
+                            <button class="filter-btn active">All</button>
+                            <button class="filter-btn">High</button>
+                            <button class="filter-btn">Medium</button>
+                            <button class="filter-btn">Low</button>
+                        </div>
+                    </div>
+                    <div class="task-item-list">
+                        <div class="task-item">
+                            <div class="task-checkbox"></div>
+                            <div class="task-info">
+                                <div class="task-title">Complete project proposal</div>
+                                <div class="task-meta">
+                                    <span class="task-priority priority-high">High</span>
+                                    <span class="task-deadline">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                            <line x1="16" y1="2" x2="16" y2="6"></line>
+                                            <line x1="8" y1="2" x2="8" y2="6"></line>
+                                            <line x1="3" y1="10" x2="21" y2="10"></line>
+                                        </svg>
+                                        Jun 15, 2023
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="task-item">
+                            <div class="task-checkbox checked"></div>
+                            <div class="task-info">
+                                <div class="task-title">Design new dashboard UI</div>
+                                <div class="task-meta">
+                                    <span class="task-priority priority-high">High</span>
+                                    <span class="task-deadline">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                            <line x1="16" y1="2" x2="16" y2="6"></line>
+                                            <line x1="8" y1="2" x2="8" y2="6"></line>
+                                            <line x1="3" y1="10" x2="21" y2="10"></line>
+                                        </svg>
+                                        Jun 10, 2023
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="task-item">
+                            <div class="task-checkbox"></div>
+                            <div class="task-info">
+                                <div class="task-title">Set up CI/CD pipeline</div>
+                                <div class="task-meta">
+                                    <span class="task-priority priority-medium">Medium</span>
+                                    <span class="task-deadline">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                            <line x1="16" y1="2" x2="16" y2="6"></line>
+                                            <line x1="8" y1="2" x2="8" y2="6"></line>
+                                            <line x1="3" y1="10" x2="21" y2="10"></line>
+                                        </svg>
+                                        Jun 20, 2023
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="task-item">
+                            <div class="task-checkbox checked"></div>
+                            <div class="task-info">
+                                <div class="task-title">Create user onboarding flow</div>
+                                <div class="task-meta">
+                                    <span class="task-priority priority-low">Low</span>
+                                    <span class="task-deadline">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                            <line x1="16" y1="2" x2="16" y2="6"></line>
+                                            <line x1="8" y1="2" x2="8" y2="6"></line>
+                                            <line x1="3" y1="10" x2="21" y2="10"></line>
+                                        </svg>
+                                        Jun 18, 2023
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="task-item">
+                            <div class="task-checkbox"></div>
+                            <div class="task-info">
+                                <div class="task-title">Document API endpoints</div>
+                                <div class="task-meta">
+                                    <span class="task-priority priority-medium">Medium</span>
+                                    <span class="task-deadline">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                            <line x1="16" y1="2" x2="16" y2="6"></line>
+                                            <line x1="8" y1="2" x2="8" y2="6"></line>
+                                            <line x1="3" y1="10" x2="21" y2="10"></line>
+                                        </svg>
+                                        Jun 25, 2023
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="task-item">
+                            <div class="task-checkbox"></div>
+                            <div class="task-info">
+                                <div class="task-title">Implement dark mode</div>
+                                <div class="task-meta">
+                                    <span class="task-priority priority-high">High</span>
+                                    <span class="task-deadline">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                            <line x1="16" y1="2" x2="16" y2="6"></line>
+                                            <line x1="8" y1="2" x2="8" y2="6"></line>
+                                            <line x1="3" y1="10" x2="21" y2="10"></line>
+                                        </svg>
+                                        Jun 12, 2023
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <button class="quick-add-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 5v14M5 12h14"></path>
+        </svg>
+    </button>
+
+    <div class="ai-assistant">
+        <div class="ai-header">
+            <div style="display: flex; align-items: center; gap: 0.75rem;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+                <span>AI Assistant</span>
+            </div>
+            <button class="close-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        <div class="ai-messages">
+            <div class="ai-message bot">
+                Hi there! How can I help you organize your day?
+            </div>
+        </div>
+        <div class="ai-input">
+            <input type="text" placeholder="Type a message...">
+            <button>
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="22" y1="2" x2="11" y2="13"></line>
+                    <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <div class="notifications">
+        <div class="notification">
+            <div class="notification-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                    <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                </svg>
+            </div>
+            <div class="notification-content">
+                <div class="notification-title">New Task Assigned</div>
+                <div class="notification-message">You've been assigned a new task: Complete project proposal</div>
+            </div>
+        </div>
+        <div class="notification">
+            <div class="notification-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                    <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                </svg>
+            </div>
+            <div class="notification-content">
+                <div class="notification-title">Meeting Reminder</div>
+                <div class="notification-message">Your team standup starts in 15 minutes</div>
+            </div>
+        </div>
+        <div class="notification">
+            <div class="notification-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                    <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                </svg>
+            </div>
+            <div class="notification-content">
+                <div class="notification-title">New Note Added</div>
+                <div class="notification-message">Your colleague added a new note: Project Timeline</div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="copyright">© 2025 Dynamic Dashboard. All Rights Reserved.</div>
+        <div class="footer-links">
+            <a href="#">Help</a>
+            <a href="#">Privacy</a>
+            <a href="#">Terms</a>
+            <a href="#">Contact</a>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
